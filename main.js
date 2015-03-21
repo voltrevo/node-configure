@@ -3,6 +3,7 @@
 
 var packageConfig = require(__dirname + "/package.config.json");
 var fileName = packageConfig.defaultConfigFile;
+var jsonc = require("json-comments")
 var args = require("optimist").argv;
 var fs = require("fs");
 var path = require("path");
@@ -17,7 +18,7 @@ var filePath = path.normalize(rootDir) + "/" + fileName;
 
 try {
     configData = fs.readFileSync(filePath, "utf-8");
-    module.exports = JSON.parse(configData);
+    module.exports = jsonc.parse(configData);
 }
 catch(e) {
     var msg = 'Unable to read or parse file "' + filePath + '". Exception caught: ' + e;
